@@ -7,17 +7,24 @@ Details of the PJM Markets Gateway web service can be found [here](https://www.p
 
 Written in C because I wanted to learn libcurl and expat.
 
-## Compiling
-To use this tool, install dependencies:
+## Installing
+It is probably easiest to use docker/podman to run this.
+```
+docker build -t pjm-mg-util .
+```
 
-    $ yum install -y expat-devel libcurl-devel cmake
+If docker/podman are not an option, compile from source. First, install dependencies (Fedora):
+```
+dnf install -y expat-devel libcurl-devel cmake
+```
 
 Checkout this repo and compile.
-
-    $ git clone https://github.com/mbheinen/pjm-mg-util
-    $ cd pjm-mg-util
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    $ make
-    $ sudo make install
+```
+git clone https://github.com/mbheinen/pjm-mg-util
+cd pjm-mg-util
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
