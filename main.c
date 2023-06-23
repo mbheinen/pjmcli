@@ -393,7 +393,7 @@ static int query_markets_gateway(CURL *curl, const char *session_token, struct m
 {
 	int ret;
 	struct curl_slist *headers = NULL;
-	char session_cookie[128] = {0};
+	char session_cookie[256] = {0};
 	char *request_string, *query_request_string;
 	XML_Parser p;
 	char *url;
