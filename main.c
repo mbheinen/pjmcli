@@ -539,21 +539,23 @@ int main(int argc, char *argv[])
 {
 	CURL *curl;
 	char session_token[128] = {0};
-	char user_name[48] = "username", password[48] = "password";
+	char *username, *password;
 	int use_pjm_sandbox;
 
 	use_pjm_sandbox = 0;
+	username = getenv("PJM_USERNAME");
+	password = getenv("PJM_PASSWORD");
 	debug_flag = ON;
   
-	if(debug_flag == ON) printf("username: %s\n", user_name);
-	if(debug_flag == ON) printf("password: %s\n", password); /* TODO: Probably not good idea to log password */
+	if(debug_flag == ON) printf("username: %s\n", username != NULL ? username : "Not set! (Set PJM_USERNAME environment variable)");
+	if(debug_flag == ON) printf("password: %s\n", password != NULL ? "******" : "Not set! (Set PJM_PASSWORD environment variable)");
 
 	/* Initialize libcurl session */ 
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl = curl_easy_init();
 
 	/* Get PJM OpenAM session token*/
-	get_openam_session_token(curl, user_name, password, session_token, sizeof(session_token), use_pjm_sandbox);
+	get_openam_session_token(curl, username, password, session_token, sizeof(session_token), use_pjm_sandbox);
 	if(debug_flag == ON) printf("OpenAM session token: %s\n", session_token);
 
 	/* Query Markets Gateway web service for yesterday */

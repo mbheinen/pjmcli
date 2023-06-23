@@ -12,6 +12,10 @@ It is probably easiest to use docker/podman to run this.
 ```
 docker build -t pjm-mg-util .
 ```
+Once the image has been built, run it by passing in your PJM username and password. If you don't have credentials, register to get some [here](https://sso.pjm.com/).
+```
+docker run -e "PJM_USERNAME=<your username>" -e "PJM_PASSWORD=<your password>" pjm-mg-util
+```
 
 If docker/podman are not an option, compile from source. First, install dependencies (Fedora):
 ```
@@ -28,3 +32,9 @@ cmake ..
 make
 sudo make install
 ```
+
+Then to run the tool first set environment variables for username and password, then run the tool.
+```
+PJM_USERNAME=<your username>
+PJM_PASSWORD=<your password>
+pjm-mg-util
